@@ -31,6 +31,20 @@ class Player {
             this.updateUI();
         }
     }
+
+    isCollidingWith (other) {
+        if (
+            this.positionX < other.positionX + other.width &&
+            this.positionX + this.width > other.positionX &&
+            this.positionY < other.positionY + other.height &&
+            this.positionY + this.height > other.positionY
+        ) {
+            console.log("collision detected");
+            return true;
+        }
+
+        return false;
+    }
 }
 
 class Obstacle {
@@ -78,11 +92,18 @@ const obstacleArray = [];
 setInterval(() => {
     const newObstacle = new Obstacle;
     obstacleArray.push(newObstacle);
-}, 6000);
+}, 2000);
 
+// update obstacles
 setInterval(() => {
     obstacleArray.forEach((obstacleInstance) => {
+        // move obstacle
         obstacleInstance.moveDown();
+
+        // detect collition with player
+        if (player.isCollidingWith(obstacleInstance)) {
+            location.href = "./gameover.html";
+        }
     });
 }, 1000 / 60);
 
