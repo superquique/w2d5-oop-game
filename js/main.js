@@ -5,7 +5,7 @@ class Player {
     constructor () {
         this.width = 20;
         this.height =  20;
-        this.positionX = 40;
+        this.positionX = 50 - this.width / 2;
         this.positionY = 0;
         this.updateUI();
     }
